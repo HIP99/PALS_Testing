@@ -1,0 +1,22 @@
+Configured PORT_DRIVE_MAP:
+Port 2 -> PALS_A3
+Port 6 -> PALS_A4
+Port 7 -> PALS_A6
+
+
+Switching to SATA port 2 (Drive: PALS_A3)...
+❌ No activity detected on SATA port 2 (Drive: PALS_A3) after 60 seconds
+Warning: Block device /dev/PALS_A3 not found or cannot be detached.
+
+
+Switching to SATA port 6 (Drive: PALS_A4)...
+❌ No activity detected on SATA port 6 (Drive: PALS_A4) after 60 seconds
+Warning: Block device /dev/PALS_A4 not found or cannot be detached.
+
+
+Switching to SATA port 7 (Drive: PALS_A6)...
+❌ No activity detected on SATA port 7 (Drive: PALS_A6) after 60 seconds
+Warning: Block device /dev/PALS_A6 not found or cannot be detached.
+
+
+Summary: 0/3 ports working

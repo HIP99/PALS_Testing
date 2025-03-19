@@ -1,0 +1,9 @@
+# Format: PORT=DRIVE
+0=None
+1=None
+2=A3
+3=None
+4=None
+5=None
+6=A4
+7=A6
