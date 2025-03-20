@@ -19,12 +19,12 @@ CONFNIBBLE_DIR=0xf
 BYTE0=0x0
 BYTE1=0x0
 
-echo Initialising ports on bus $bus, address $addr
-i2cset -y $bus $addr 0x02 0x00
-i2cset -y $bus $addr 0x03 0x00
+# echo Initialising ports on bus $bus, address $addr
+# i2cset -y $bus $addr 0x02 0x00
+# i2cset -y $bus $addr 0x03 0x00
 
-i2cset -y $bus $addr 0x06 0x00
-i2cset -y $bus $addr 0x07 0x00
+# i2cset -y $bus $addr 0x06 0x00
+# i2cset -y $bus $addr 0x07 0x00
 
 case $port in
   0) 
@@ -54,7 +54,6 @@ case $port in
 *) 
 echo Turning off;;
 esac 
-
 
 #OUTPUTS0=`printf "0x%x" $((~BYTE0 & 0xff))`
 #OUTPUTS1=`printf "0x%x" $((~BYTE1 & 0xff))`

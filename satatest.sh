@@ -94,11 +94,30 @@ for PORT in "${!PORT_DRIVE_MAP[@]}"; do
 
     echo "Monitoring activity on SATA port $PORT..."
     ACTIVITY_DETECTED=false
-    for i in $(seq 1 60); do
-        ##
-        ## The exact message needs to be updated.
-        ##
-        if dmesg | grep -q "I cannot remember the message"; then
+
+    ## Checking dmesg for activity. Not ideal
+    # sudo dmesg -c > /dev/null
+    # for i in $(seq 1 60); do
+    #     if dmesg | grep -q "ata1: SATA link up"; then
+    #         ACTIVITY_DETECTED=true
+    #         break
+    #     fi
+    #     if dmesg | grep -q "ata2: SATA link up"; then
+    #         ACTIVITY_DETECTED=true
+    #         break
+    #     fi
+    #     if dmesg | grep -q "sd 0:0:0:0 \[sdd\] Attached SCSI disk"; then
+    #         ACTIVITY_DETECTED=true
+    #         break
+    #     fi
+    #     sleep 1
+    # done
+
+    ## Monitoring SATA activity by checking block devices
+    for i in $(seq 1 20); do
+        ## I'm not sure if sdd or drive label is requried here
+        if [ -e "/sys/block/sdd" ]; then
+        # if [ -e "/sys/block/$FULL_DRIVE_NAME" ]; then
             ACTIVITY_DETECTED=true
             break
         fi
@@ -115,11 +134,11 @@ for PORT in "${!PORT_DRIVE_MAP[@]}"; do
     ####################
     # 4. Detach drive
     ####################
-    if [ -e "/sys/block/$FULL_DRIVE_NAME/device/delete" ]; then
+    if [ -e "/sys/block/sdd/device/delete" ]; then
         echo "Detaching block device /dev/$FULL_DRIVE_NAME..." | tee -a "$LOG_FILE"
-        echo 1 > "/sys/block/$FULL_DRIVE_NAME/device/delete"
+        echo 1 > "/sys/block/sdd/device/delete"
         if [ $? -eq 0 ]; then
-            echo "Block device /dev/$FULL_DRIVE_NAME detached successfully." | tee -a "$LOG_FILE"
+            echo "Block device /dev/sdd detached successfully." | tee -a "$LOG_FILE"
         else
             echo "Error: Failed to detach block device /dev/$FULL_DRIVE_NAME." | tee -a "$LOG_FILE"
         fi
